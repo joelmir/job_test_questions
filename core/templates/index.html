@@ -5,15 +5,15 @@
 <!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
 <!--[if (IE 9)]><html class="no-js ie9" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--> 
-<html lang="en-US"> <!--<![endif]-->
+<html lang="pt-BR"> <!--<![endif]-->
 <head>
  
 <!-- Meta Tags -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title>Job Test Questions</title>   
+<title>Questionario de avaliação de desenvolvedores</title>   
 
-<meta name="description" content="Job Test Questions" /> 
+<meta name="description" content="Questionario de avaliação de desenvolvedores" /> 
 
 <!-- Mobile Specifics -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,8 +22,36 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/4.10.3/bootstrap-slider.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/4.10.3/css/bootstrap-slider.min.css">
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('.slider-field').slider();
+    $(".slider-field").on("slide", function(slideEvt) {
+      $(this).parent('div').children('.current-slider-val').children('span').text(slideEvt.value);
+    });
+    $(".slider-enabled").click(function() {
+      if(this.checked) {
+        $(this).parent('div').children('.slider-field').slider("disable");
+      }
+      else {
+        $(this).parent('div').children('.slider-field').slider("enable");
+      }
+    });
+  });
+  
+</script>
+<style type="text/css">
+  .slider-selection {
+    background: #BABABA;
+  }
+  .current-slider-val{
+    margin-left: 10px;
+  }
+</style>
 
 </head>
 
@@ -38,14 +66,14 @@ vaga de desenvolvedor web.</h3>
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Nome">
+              <input type="text" class="form-control" placeholder="Nome" required>
             </div>    
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email">
+              <input type="email" class="form-control" placeholder="Email" required>
             </div>  
           </div>
         </div>
@@ -67,17 +95,11 @@ vaga de desenvolvedor web.</h3>
                     </div>
                     <div class="col-sm-10">
                       <div class="form-group">
-                        <input type="radio" value='0' name='{{ question.id }}' aria-label="-">
-                        <input type="radio" value='1' name='{{ question.id }}' aria-label="1">
-                        <input type="radio" value='2' name='{{ question.id }}' aria-label="2">
-                        <input type="radio" value='3' name='{{ question.id }}' aria-label="3">
-                        <input type="radio" value='4' name='{{ question.id }}' aria-label="4">
-                        <input type="radio" value='5' name='{{ question.id }}' aria-label="5">
-                        <input type="radio" value='6' name='{{ question.id }}' aria-label="6">
-                        <input type="radio" value='7' name='{{ question.id }}' aria-label="7">
-                        <input type="radio" value='8' name='{{ question.id }}' aria-label="8">
-                        <input type="radio" value='9' name='{{ question.id }}' aria-label="9">
-                        <input type="radio" value='10' name='{{ question.id }}' aria-label="10">
+                        <input type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0" class="slider-field"  data-slider-enabled="true"/>
+                        <span class='current-slider-val'>
+                          <span>0</span>
+                        </span>
+                        <input class="slider-enabled" type="checkbox"/>Não Responder
                       </div>
                     </div>
                   </div>
