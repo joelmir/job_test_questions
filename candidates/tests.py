@@ -2,7 +2,7 @@
 from django.test import TestCase
 
 from candidates.models import Candidate, Answer
-from questions.models import Question, Choice
+from questions.models import Question
 
 class CandidateTestCase(TestCase):
     def setUp(self):
