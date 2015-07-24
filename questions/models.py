@@ -6,3 +6,6 @@ class Question(models.Model):
 
     def __unicode__(self):
       return u'{0}'.format(self.question_text)
+
+    class Meta:
+        ordering = ('id',)

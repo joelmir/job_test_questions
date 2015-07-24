@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from questions.models import Question
-from django.core.mail import send_mail
+
 from candidates.models import Candidate, Answer
 
 def home(request):
@@ -20,13 +20,12 @@ def home(request):
                 question = Question.objects.get(id=question_id)
                 Answer.objects.create(candidate=candidate, question=question, grade=int(request.POST.get(option)))
 
+        candidate.send_mail()
         return render(request, 'index.html', { 
-          'questions':Question.objects.all().order_by('question_text')
+          'questions':Question.objects.all().order_by('question_text'),
+          'message':'Obrigado por se Candidatar!',
+          'name':name
         })
 
 
 
-
-
-        #send_mail('Subject here', , 'joelmir.ribacki@gmail.com',['joedekid@gmail.com'], fail_silently=False)
-    

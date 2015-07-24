@@ -10,9 +10,36 @@ class Candidate(models.Model):
     def __unicode__(self):
       return u'{0} - {1}'.format(self.name, self.email)
 
-    def send_email(self):
-        send_mail('Subject here', 'Enviar email' , 'joelmir.ribacki@gmail.com',['joedekid@gmail.com'], fail_silently=False)
-    
+    def send_mail(self):
+        questions_id = Answer.objects.filter(candidate=self, grade__gte=7).values_list('question_id')
+        questions = [question.lower().strip() for question in Question.objects.filter(id__in=questions_id).values_list('question_text', flat=True)]
+        default_mail = True
+        if 'html' in questions and 'css' in questions and 'javascript' in questions:
+            default_mail = False
+            print 'Front-End'
+            send_mail('Obrigado por se candidatar', '''Obrigado por se candidatar, assim que tivermos uma vaga disponível
+
+para programador Front-End entraremos em contato.''' , 'joelmir.ribacki@gmail.com',[self.email], fail_silently=False)
+
+        if 'python' in questions and 'django' in questions:
+            default_mail = False
+            print 'Back-End'
+            send_mail('Obrigado por se candidatar', '''Obrigado por se candidatar, assim que tivermos uma vaga disponível
+
+para programador Back-End entraremos em contato.''' , 'joelmir.ribacki@gmail.com',[self.email], fail_silently=False)
+        
+        if 'desenvolvedor ios' in questions or 'desenvolvedor android' in questions:
+            default_mail = False
+            print 'Mobile'
+            send_mail('Obrigado por se candidatar', '''Obrigado por se candidatar, assim que tivermos uma vaga disponível
+
+para programador Mobile entraremos em contato.''' , 'joelmir.ribacki@gmail.com',[self.email], fail_silently=False)
+
+        if default_mail:
+            print 'Default: ', self.email
+            send_mail('Obrigado por se candidatar', '''Obrigado por se candidatar, assim que tivermos uma vaga disponível
+
+para programador entraremos em contato.''' , 'joelmir.ribacki@gmail.com',[self.email], fail_silently=False)
 
 
 class Answer(models.Model):
