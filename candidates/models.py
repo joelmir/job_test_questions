@@ -2,6 +2,7 @@
 from django.db import models
 from questions.models import Question
 from django.core.mail import send_mail
+from django.conf import settings
 
 class Candidate(models.Model):
     name = models.CharField(max_length=200)
@@ -39,7 +40,7 @@ para programador Mobile entraremos em contato.''' , 'joelmir.ribacki@gmail.com',
             print 'Default: ', self.email
             send_mail('Obrigado por se candidatar', '''Obrigado por se candidatar, assim que tivermos uma vaga disponível
 
-para programador entraremos em contato.''' , 'joelmir.ribacki@gmail.com',[self.email], fail_silently=False)
+para programador entraremos em contato.''' , settings.DEFAULT_FROM ,[self.email], fail_silently=False)
 
 
 class Answer(models.Model):
